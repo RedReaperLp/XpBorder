@@ -34,14 +34,14 @@ public final class Main extends JavaPlugin implements Listener {
     public void sendWorldBorder(Player player, Color color, double size, Location centerLocation) {
         WorldBorder worldBorder = new WorldBorder();
         worldBorder.world = ((CraftWorld) centerLocation.getWorld()).getHandle();
-        worldBorder.setCenter(centerLocation.getBlockX() + 0.5, centerLocation.getBlockZ() + 0.5);
+        worldBorder.c(centerLocation.getBlockX() + 0.5, centerLocation.getBlockZ() + 0.5);
 
-        worldBorder.setSize(size);
+        worldBorder.a(size);
 
-        worldBorder.setWarningBlocks(0);
-        worldBorder.setWarningTime(0);
+        worldBorder.b(0);
+        worldBorder.c(0);
 
-        ((CraftPlayer) player).getHandle().connection.send(new ClientboundInitializeBorderPacket(worldBorder));
+        ((CraftPlayer)player).getHandle().b.a(new ClientboundInitializeBorderPacket(worldBorder));
     }
 
     public Location spawnLocation = new Location(Bukkit.getWorld("world"), 0, 0, 0);
