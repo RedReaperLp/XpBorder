@@ -1,10 +1,11 @@
-package me.reaper.xpborder.xpborder;
+package me.reaper.xpborder;
 
-import me.reaper.xpborder.xpborder.commands.Size;
-import me.reaper.xpborder.xpborder.commands.Timer;
+import me.reaper.xpborder.commands.Size;
+import me.reaper.xpborder.commands.Timer;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.minecraft.network.protocol.game.ClientboundInitializeBorderPacket;
+import net.minecraft.world.level.border.WorldBorder;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -29,6 +30,7 @@ public final class Main extends JavaPlugin implements Listener {
 
     public double bisherigeGroesse = 0;
 
+
     public void sendWorldBorder(Player player, Color color, double size, Location centerLocation) {
         WorldBorder worldBorder = new WorldBorder();
         worldBorder.world = ((CraftWorld) centerLocation.getWorld()).getHandle();
@@ -36,10 +38,10 @@ public final class Main extends JavaPlugin implements Listener {
 
         worldBorder.setSize(size);
 
-        worldBorder.setWarningDistance(0);
+        worldBorder.setWarningBlocks(0);
         worldBorder.setWarningTime(0);
 
-        ((CraftPlayer) player).getHandle().b.sendPacket(new ClientboundInitializeBorderPacket(worldBorder));
+        ((CraftPlayer) player).getHandle().connection.send(new ClientboundInitializeBorderPacket(worldBorder));
     }
 
     public Location spawnLocation = new Location(Bukkit.getWorld("world"), 0, 0, 0);
@@ -50,7 +52,7 @@ public final class Main extends JavaPlugin implements Listener {
         if (isPaused) player.setGameMode(GameMode.SPECTATOR);
         if (!isPaused) player.setGameMode(GameMode.SURVIVAL);
         if (isPaused) return;
-        if (!isPaused);
+        if (!isPaused) ;
         List<String> teleportedPlayers = getConfig().getStringList("teleported-players");
         if (teleportedPlayers.contains(player.getUniqueId().toString())) return;
         event.getPlayer().teleport(spawnLocation);
@@ -75,12 +77,12 @@ public final class Main extends JavaPlugin implements Listener {
         int startSize = getConfig().getInt("startSize");
         if (startSize == 0) getConfig().set("startSize", 1);
 
-        sec = getConfig().getInt("seconds",0);
+        sec = getConfig().getInt("seconds", 0);
 
-        Bukkit.getScheduler().runTaskTimerAsynchronously(this, ()->{
-            getConfig().set("seconds",sec);
+        Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
+            getConfig().set("seconds", sec);
             saveConfig();
-        },60*20, 60*20);
+        }, 60 * 20, 60 * 20);
 
         Bukkit.getWorld("world").setGameRule(GameRule.DO_WEATHER_CYCLE, false);
         Bukkit.getWorld("world").setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
@@ -89,7 +91,7 @@ public final class Main extends JavaPlugin implements Listener {
 
         Bukkit.getScheduler().runTaskTimer(this, () -> {
 
-            for(Player player : Bukkit.getOnlinePlayers()) {
+            for (Player player : Bukkit.getOnlinePlayers()) {
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(ChatColor.YELLOW + getTime() + ChatColor.GREEN + getTotalXPLevels() + " Total Level"));
             }
 
@@ -111,7 +113,7 @@ public final class Main extends JavaPlugin implements Listener {
 
             Color color = Color.BLUE;
 
-            if(bisherigeGroesse != size) {
+            if (bisherigeGroesse != size) {
                 color = Color.GREEN;
                 bisherigeGroesse = size;
                 System.out.println("WorldBorder size changed");
@@ -131,7 +133,7 @@ public final class Main extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
-        for(Player player : Bukkit.getOnlinePlayers()) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
             sendWorldBorder(player, Color.GREEN, Double.MAX_VALUE, spawnLocation);
             player.setGameMode(GameMode.SPECTATOR);
 
@@ -145,7 +147,7 @@ public final class Main extends JavaPlugin implements Listener {
         int seconds = ((sec % 86400) % 3600) % 60;
 
 
-        return String.format("%d T  %d H  %d Min  %d Sec    ",days, hours, minutes, seconds);
+        return String.format("%d T  %d H  %d Min  %d Sec    ", days, hours, minutes, seconds);
 
         // "0 days 0:0:12"
 
@@ -186,7 +188,6 @@ public final class Main extends JavaPlugin implements Listener {
         getConfig().set("teleported-players", new ArrayList<String>());
         getConfig().set("startSize", new ArrayList<String>());
         getConfig().set("startSize", startSize);
-
 
 
         Bukkit.getScheduler().runTaskAsynchronously(this,

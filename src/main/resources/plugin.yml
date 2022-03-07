@@ -1,4 +1,17 @@
-name: XpBorder v1.18.1
-version: '${project.version}'
-main: me.reaper.xpborder.xpborder.XpBorder
-api-version: 1.18
+name: XpBorder
+version: 1.0.1
+description: XP = WorldBorderGroesse
+main: me.reaper.xpborder.Main
+commands:
+  borderreset:
+    description: resets all online player experience and resets border
+    usage: /<command>
+    aliases: resetborder
+    permission: xpborder.admin
+  timer:
+    description: resume/pause
+    permission: xpborder.admin
+  size:
+    description: sets worldborder size
+    usage: /size <size you want to set standard>
+

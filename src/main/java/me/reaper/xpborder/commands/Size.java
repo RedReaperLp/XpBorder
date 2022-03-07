@@ -1,6 +1,6 @@
-package me.reaper.xpborder.xpborder.commands;
+package me.reaper.xpborder.commands;
 
-import me.reaper.xpborder.xpborder.Main;
+import me.reaper.xpborder.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
