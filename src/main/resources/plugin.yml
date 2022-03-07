@@ -1,0 +1,4 @@
+name: XpBorder v1.18.1
+version: '${project.version}'
+main: me.reaper.xpborder.xpborder.XpBorder
+api-version: 1.18
