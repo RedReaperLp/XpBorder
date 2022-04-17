@@ -116,7 +116,7 @@ public final class Main extends JavaPlugin implements Listener {
             if (bisherigeGroesse != size) {
                 color = Color.GREEN;
                 bisherigeGroesse = size;
-                System.out.println("WorldBorder size changed");
+                getLogger().info("WorldBorder size changed");
 
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     player.spigot().sendMessage(ChatMessageType.CHAT, TextComponent.fromLegacyText(ChatColor.GREEN + "WorldBorder expanding"));
@@ -125,7 +125,7 @@ public final class Main extends JavaPlugin implements Listener {
             }
 
             for (Player player : Bukkit.getOnlinePlayers()) {
-                sendWorldBorder(player, color, size, spawnLocation);
+                sendWorldBorder(player, Color.GREEN, size, spawnLocation);
             }
 
         }, 20, 20);
@@ -176,7 +176,6 @@ public final class Main extends JavaPlugin implements Listener {
                 || event.getRespawnLocation().getBlockZ() > maxCoords / 2
                 || event.getRespawnLocation().getBlockZ() < -maxCoords / 2) {
             event.setRespawnLocation(spawnLocation);
-            System.out.println("Geändert");
         }
 
     }
