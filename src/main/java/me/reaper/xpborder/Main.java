@@ -41,7 +41,7 @@ public final class Main extends JavaPlugin implements Listener {
         worldBorder.b(0);
         worldBorder.c(0);
 
-        ((CraftPlayer)player).getHandle().b.a(new ClientboundInitializeBorderPacket(worldBorder));
+        ((CraftPlayer) player).getHandle().b.a(new ClientboundInitializeBorderPacket(worldBorder));
     }
 
     public Location spawnLocation = new Location(Bukkit.getWorld("world"), 0, 0, 0);

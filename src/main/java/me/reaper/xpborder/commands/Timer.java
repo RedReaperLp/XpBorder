@@ -60,7 +60,8 @@ public class Timer implements CommandExecutor {
 
         }
     }
-    private void resume(CommandSender sender){
+
+    private void resume(CommandSender sender) {
         if (main.isPaused == false) {
             sender.sendMessage("§cPlugin läuft Bereits");
         } else {
