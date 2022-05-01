@@ -45,7 +45,7 @@ public class Timer implements CommandExecutor {
     }
 
     private void pause(CommandSender sender) {
-        if (main.isPaused == true) {
+        if (main.isPaused) {
             sender.sendMessage("§cPlugin ist bereits Pausiert");
         } else {
             sender.sendMessage("§aPlugin ist jetzt pausiert.");
@@ -62,7 +62,7 @@ public class Timer implements CommandExecutor {
     }
 
     private void resume(CommandSender sender) {
-        if (main.isPaused == false) {
+        if (!main.isPaused) {
             sender.sendMessage("§cPlugin läuft Bereits");
         } else {
 

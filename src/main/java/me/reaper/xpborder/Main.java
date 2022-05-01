@@ -9,8 +9,8 @@ import net.minecraft.world.level.border.WorldBorder;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_18_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_18_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_18_R2.CraftWorld;
+import org.bukkit.craftbukkit.v1_18_R2.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -52,7 +52,6 @@ public final class Main extends JavaPlugin implements Listener {
         if (isPaused) player.setGameMode(GameMode.SPECTATOR);
         if (!isPaused) player.setGameMode(GameMode.SURVIVAL);
         if (isPaused) return;
-        if (!isPaused) ;
         List<String> teleportedPlayers = getConfig().getStringList("teleported-players");
         if (teleportedPlayers.contains(player.getUniqueId().toString())) return;
         event.getPlayer().teleport(spawnLocation);
@@ -111,10 +110,7 @@ public final class Main extends JavaPlugin implements Listener {
                 size = getConfig().getInt("size");
             }
 
-            Color color = Color.BLUE;
-
             if (bisherigeGroesse != size) {
-                color = Color.GREEN;
                 bisherigeGroesse = size;
                 getLogger().info("WorldBorder size changed");
 
